@@ -13,7 +13,7 @@ phases:
       - npm run build
 artifacts:
   files:
-    - '**/*'
+    - dist/**/*
     - appspec.yml
     - scripts/**/* 
-  base-directory: /
+  base-directory: .
