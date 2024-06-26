@@ -16,4 +16,4 @@ artifacts:
     - '**/*'
     - appspec.yml
     - scripts/**/* 
-  base-directory: dist
+  base-directory: no
