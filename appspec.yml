@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: SHOP_WEB.zip
+  - source: /
     destination: /home/ec2-user/startbootstrap-shop-homepage
 hooks:
   AfterInstall:
