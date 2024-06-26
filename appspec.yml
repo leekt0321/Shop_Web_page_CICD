@@ -1,0 +1,13 @@
+version: 0.0
+os: linux
+files:
+  - source: SHOP_WEB.zip
+    destination: /home/ec2-user/startbootstrap-shop-homepage
+hooks:
+  AfterInstall:
+    - location: scripts/install.sh
+      timeout: 300
+      runas: ec2-user
+    - location: scripts/start.sh
+      timeout: 300
+      runas: ec2-user

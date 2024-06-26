@@ -13,6 +13,7 @@ phases:
       - npm run build
 artifacts:
   files:
-    - '**/*'
+    - SHOP_WEB.zip
+    - appspec.yml                             
+    - scripts/**/*
   base-directory: dist
-
