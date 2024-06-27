@@ -12,6 +12,7 @@ BLOCK='<VirtualHost *:80>
         Order deny,allow
         Allow from all
     </Proxy>
+    RedirectMatch 301 ^/app$ /app/
     ProxyPass /app http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/ disablereuse=on
     ProxyPassReverse /app http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
 
