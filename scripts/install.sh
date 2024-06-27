@@ -12,8 +12,8 @@ BLOCK='<VirtualHost *:80>
         Order deny,allow
         Allow from all
     </Proxy>
-    ProxyPass /app/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/ disablereuse=on
-    ProxyPassReverse /app/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
+    ProxyPass /app http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/ disablereuse=on
+    ProxyPassReverse /app http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
 
     # Static 파일 설정
     DocumentRoot "/home/ec2-user/startbootstrap-shop-homepage/dist"
@@ -22,10 +22,7 @@ BLOCK='<VirtualHost *:80>
         AllowOverride None
         Require all granted
     </Directory>
-    
-    # ProxyPass를 특정 경로로 제한하여 Static 파일과의 충돌을 방지
-    ProxyPass / http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
-    ProxyPassReverse / http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
+
 </VirtualHost>'
 
 # 블록이 이미 있는지 확인
