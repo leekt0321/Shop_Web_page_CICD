@@ -5,7 +5,8 @@ sudo yum -y install httpd
 sudo yum -y install php php-cli php-common php-fpm php-xml php-mysqlnd php-gd php-curl php-json php-mbstring php-zip php-intl
 
 CONFIG_FILE="/etc/httpd/conf/httpd.conf"
-BLOCK='<VirtualHost *:80>
+read -r -d '' BLOCK << 'EOF'
+<VirtualHost *:80>
     # Proxy 설정
     ProxyRequests Off
     ProxyPreserveHost On
@@ -28,7 +29,8 @@ BLOCK='<VirtualHost *:80>
         AllowOverride None
         Require all granted
     </Directory>
-</VirtualHost>'
+</VirtualHost>
+EOF
 
 if grep -q "<VirtualHost \*:80>" "$CONFIG_FILE"; then
     # 기존 <VirtualHost *:80> 블록 찾기 및 대체
