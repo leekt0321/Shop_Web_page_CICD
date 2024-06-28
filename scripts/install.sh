@@ -5,8 +5,7 @@ sudo yum -y install httpd
 sudo yum -y install php php-cli php-common php-fpm php-xml php-mysqlnd php-gd php-curl php-json php-mbstring php-zip php-intl
 
 CONFIG_FILE="/etc/httpd/conf/httpd.conf"
-read -r -d '' BLOCK << 'EOF'
-<VirtualHost *:80>
+BLOCK='<VirtualHost *:80>
     # Proxy 설정
     ProxyRequests Off
     ProxyPreserveHost On
@@ -29,14 +28,23 @@ read -r -d '' BLOCK << 'EOF'
         AllowOverride None
         Require all granted
     </Directory>
-</VirtualHost>
-EOF
+</VirtualHost>'
 
-if grep -q "<VirtualHost \*:80>" "$CONFIG_FILE"; then
-    # 기존 <VirtualHost *:80> 블록 찾기 및 대체
-    sudo sed -i "/<VirtualHost \*:80>/,/<\/VirtualHost>/c\\$BLOCK" "$CONFIG_FILE"
-    echo "Existing <VirtualHost *:80> block replaced in $CONFIG_FILE"
-else
-    echo "$BLOCK" | sudo tee -a "$CONFIG_FILE" > /dev/null
-    echo "Configuration block added to $CONFIG_FILE"
-fi
+# 임시 파일 생성
+TMP_FILE=$(mktemp)
+
+# 기존 블록을 대체하거나 추가하는 awk 스크립트
+awk -v block="$BLOCK" '
+BEGIN { found = 0 }
+/<VirtualHost \*:80>/ { found = 1 }
+/<VirtualHost \*:80>/,/<\/VirtualHost>/ { next }
+{ print }
+/<\/VirtualHost>/ && found == 1 { print block; found = 2 }
+END { if (found == 0) print block }
+' "$CONFIG_FILE" > "$TMP_FILE"
+
+# 변경 사항을 원본 파일에 적용
+sudo mv "$TMP_FILE" "$CONFIG_FILE"
+
+echo "Configuration updated in $CONFIG_FILE"
+
