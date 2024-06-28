@@ -26,11 +26,11 @@ BLOCK='<VirtualHost *:80>
 
 </VirtualHost>'
 
-# 블록이 이미 있는지 확인
-if ! grep -q "<VirtualHost *:80>" "$CONFIG_FILE"; then
+if grep -q "<VirtualHost *:80>" "$CONFIG_FILE"; then
+    # 기존 <VirtualHost *:80> 블록 찾기
+    sudo sed -i '/<VirtualHost \*:80>/,/<\/VirtualHost>/c\'"$BLOCK" "$CONFIG_FILE"
+    echo "Existing <VirtualHost *:80> block replaced in $CONFIG_FILE"
+else
     echo "$BLOCK" | sudo tee -a "$CONFIG_FILE" > /dev/null
     echo "Configuration block added to $CONFIG_FILE"
-else
-    echo "Configuration block already exists in $CONFIG_FILE"
 fi
-
