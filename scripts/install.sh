@@ -21,6 +21,10 @@ BLOCK='<VirtualHost *:80>
     ProxyPass /login/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/login.jsp disablereuse=on
     ProxyPassReverse /login/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/login.jsp
 
+    RedirectMatch 301 ^/check$ /check/
+    ProxyPass /check/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/check.jsp disablereuse=on
+    ProxyPassReverse /check/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/check.jsp
+
     # Static 파일 설정
     DocumentRoot "/home/ec2-user/startbootstrap-shop-homepage/dist"
     <Directory "/home/ec2-user/startbootstrap-shop-homepage/dist">
