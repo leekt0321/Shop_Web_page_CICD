@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var navigateButton = document.getElementById('navigateButton');
     if (navigateButton) {
         navigateButton.addEventListener('click', function() {
-            window.location.href = '/app';  // /app 경로로 이동
+            window.location.href = '/login';  // /login 경로로 이동
         });
     }
 });

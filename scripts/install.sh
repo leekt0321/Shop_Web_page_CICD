@@ -2,6 +2,7 @@
 
 sudo yum -y install npm
 sudo yum -y install httpd
+sudo yum -y install php php-cli php-common php-fpm php-xml php-mysqlnd php-gd php-curl php-json php-mbstring php-zip php-intl
 
 CONFIG_FILE="/etc/httpd/conf/httpd.conf"
 BLOCK='<VirtualHost *:80>
@@ -12,9 +13,13 @@ BLOCK='<VirtualHost *:80>
         Order deny,allow
         Allow from all
     </Proxy>
-    RedirectMatch 301 ^/app$ /app/
-    ProxyPass /app http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/ disablereuse=on
-    ProxyPassReverse /app http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
+    RedirectMatch 301 ^/user$ /user/
+    ProxyPass /user/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/ disablereuse=on
+    ProxyPassReverse /user/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
+
+    RedirectMatch 301 ^/login$ /login/
+    ProxyPass /login/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/ disablereuse=on
+    ProxyPassReverse /login/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/
 
     # Static 파일 설정
     DocumentRoot "/home/ec2-user/startbootstrap-shop-homepage/dist"
