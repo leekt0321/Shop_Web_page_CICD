@@ -13,4 +13,4 @@ HTTPD_CONTENT=$(cat "$HTTPD_FILE")
 # /etc/httpd/conf/httpd.conf 파일에 HTTPD 파일의 내용을 덮어쓰기
 echo "$HTTPD_CONTENT" | sudo tee /etc/httpd/conf/httpd.conf > /dev/null
 
-
+sudo systemctl restart httpd

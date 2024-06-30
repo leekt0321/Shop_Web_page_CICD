@@ -17,4 +17,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             window.location.href = '/user';  // /user 경로로 이동
         });
     }
+	
+
 });

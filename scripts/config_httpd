@@ -377,6 +377,7 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
     RedirectMatch 301 ^/login$ /login/
     ProxyPass /login/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/login.jsp disablereuse=on
     ProxyPassReverse /login/ http://internal-Project-WAS-LB-1758617147.ap-northeast-2.elb.amazonaws.com:8080/login.jsp
+    
 
 
     # Static 파일 설정
