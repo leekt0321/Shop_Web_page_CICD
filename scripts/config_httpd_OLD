@@ -381,10 +381,8 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
 
 
     # Static 파일 설정
-#    DocumentRoot "/home/ec2-user/startbootstrap-shop-homepage/dist"
-    DocumentRoot "/var/www/http/"
-#    <Directory "/home/ec2-user/startbootstrap-shop-homepage/dist">
-    <Directory "/var/www/http/">
+    DocumentRoot "/home/ec2-user/startbootstrap-shop-homepage/dist"
+    <Directory "/home/ec2-user/startbootstrap-shop-homepage/dist">
         Options Indexes FollowSymLinks
         AllowOverride None
         Require all granted
